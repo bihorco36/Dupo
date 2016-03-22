@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Dupo</string>
+    <string name="title_activity_connection">Connection</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_multi_payer_game">MultiPayerGame</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_single_player_game">SinglePlayerGame</string>
+    <string name="title_activity_invention">Invention</string>
+    <string name="title_activity_startsite">Startsite</string>
 </resources>
