@@ -4,6 +4,8 @@ import dupo.dupo.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -113,6 +115,11 @@ public class MultiPayerGame extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+//        Canvas c = new Canvas();
+//        Paint p = new Paint();
+//        p.setARGB(1, 255, 255, 255);
+//        this.drawRectangle(c, 12, 12, p);
     }
 
     @Override
@@ -157,4 +164,9 @@ public class MultiPayerGame extends Activity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+
+//    private void drawRectangle(Canvas canvas, int x, int y, Paint paint) {
+//        canvas.drawRect(10, 10, 50, 60, paint);
+//    }
 }
+
