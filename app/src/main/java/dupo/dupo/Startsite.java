@@ -45,12 +45,10 @@ public class Startsite extends ActionBarActivity {
     }
 
     public void goToMultiPlayer(View view) {
-        Intent intent = new Intent(this, MultiPayerGame.class);
-        startActivity(intent);
+        setContentView(R.layout.activity_multi_payer_game);
     }
 
     public void goToSinglePlayer(View view) {
-        Intent intent = new Intent(this, SinglePlayerGame.class);
-        startActivity(intent);
+        setContentView(R.layout.activity_single_player_game);
     }
 }
