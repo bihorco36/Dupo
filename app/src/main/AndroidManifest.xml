@@ -30,12 +30,6 @@
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
-            android:name=".SinglePlayerGame"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_single_player_game"
-            android:theme="@style/FullscreenTheme" >
-        </activity>
-        <activity
             android:name=".Invention"
             android:label="@string/title_activity_invention" >
         </activity>

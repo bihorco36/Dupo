@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 
 public class Startsite extends ActionBarActivity {
@@ -45,10 +47,11 @@ public class Startsite extends ActionBarActivity {
     }
 
     public void goToMultiPlayer(View view) {
-        setContentView(R.layout.activity_multi_payer_game);
+        setContentView(new SinglePlayerView(this));
     }
 
     public void goToSinglePlayer(View view) {
-        setContentView(R.layout.activity_single_player_game);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(new SinglePlayerView(this));
     }
 }

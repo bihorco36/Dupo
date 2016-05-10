@@ -1,4 +1,4 @@
-package dupo.dupo.util;
+package dupo.dupo;
 
 import android.app.Activity;
 import android.os.Build;

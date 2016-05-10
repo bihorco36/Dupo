@@ -1,4 +1,4 @@
-package dupo.dupo.util;
+package dupo.dupo;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
