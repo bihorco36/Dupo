@@ -7,10 +7,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.Timer;
 
@@ -21,26 +26,25 @@ public class SinglePlayerView extends View {
     Ball ball;
     Player player;
     Bot bot;
-    GameThread game;
+    TextView score;
     public Point size = new Point();
     public SinglePlayerView(Context context) {
         super(context);
+        setClickable(true);
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         display.getSize(size);
-        this.ball = new Ball(size.x / 2 + 25, size.y / 2 + 25, 50, this.size);
+
+        this.ball = new Ball(size.x / 2 + 25, size.y / 2 + 25, 50, this.size, context);
         this.ball.setColor(Color.RED);
-        this.player = new Player(size.x / 2 - 200, size.y - 300, size.x / 2 + 200, size.y - 200);
+        this.player = new Player(size.x / 2 - 200, 5* (Math.round((size.y - 200) / 5)), size.x / 2 + 200, size.y - 100, size.x);
         this.player.setColor(Color.BLACK);
-        this.bot = new Bot(size.x / 2 - 200, 100, size.x / 2 + 200, 200);
+        this.bot = new Bot(size.x / 2 - 200, 100, size.x / 2 + 200, 200, this.size.x);
         this.bot.setColor(Color.BLACK);
-//        this.game = new GameThread(this.bot, this.player, this.ball, this, this.canvas);
-//        this.game.setRunning(true);
-//        this.game.start();
         draw(canvas);
 
         Timer t = new Timer();
-        t.scheduleAtFixedRate(new GameThread(this.ball, this), 0, 50);
+        t.scheduleAtFixedRate(new GameThread(this.player, this.ball, this, this.bot,size), 0, 10);
     }
 
     public SinglePlayerView(Context context, AttributeSet attrs) {
@@ -57,5 +61,13 @@ public class SinglePlayerView extends View {
         this.ball.draw(canvas);
         this.player.draw(canvas);
         this.bot.draw(canvas);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float y = event.getY();
+        this.player.move(event.getX());
+        draw(canvas);
+        return super.onTouchEvent(event);
     }
 }
