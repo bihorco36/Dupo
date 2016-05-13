@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,8 @@ public class Ball extends GameObject {
     private boolean startDown;
     private Vibrator v;
     private View view;
+    private Sound sound;
+
 
     public Ball(float cx, float cy, float radius, Point displaySize, Context context) {
         this.initCx = this.cx = cx;
@@ -30,7 +34,8 @@ public class Ball extends GameObject {
         this.radius = radius;
         this.paint = new Paint();
         this.v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        this.view = view;
+        this.sound = new Sound(context);
+        this.sound.startGame();
     }
 
     public void setColor(int col) {
@@ -61,9 +66,11 @@ public class Ball extends GameObject {
     public void checkCollission(Player p, Player bot) {
         if (this.cx >= this.displaySize.x - 1.5*radius) {
             this.ballSpeedRight = invert(this.ballSpeedRight);
+            this.sound.bounce();
         }
         if (this.cx <= 1.5*radius) {
             this.ballSpeedRight = invert(this.ballSpeedRight);
+            this.sound.bounce();
         }
         if (this.cy >= this.displaySize.y - radius) {
             this.toInitialPos();
@@ -83,10 +90,12 @@ public class Ball extends GameObject {
         if(left <= this.cx && center >= this.cx) {
             this.ballSpeedRight = invert(Math.abs(randomAngle()));
             this.ballSpeedTop = invert(this.ballSpeedTop);
+            this.sound.bounce();
         }
         if(right >= this.cx && center <= this.cx) {
             this.ballSpeedRight = Math.abs(randomAngle());
             this.ballSpeedTop = invert(this.ballSpeedTop);
+            this.sound.bounce();
         }
     }
 
@@ -117,10 +126,6 @@ public class Ball extends GameObject {
         } else {
             this.ballSpeedTop = invert(Math.abs(ballSpeedTop));
         }
-    }
-
-    public void invertBallSpeedRight() {
-        this.ballSpeedRight = invert(this.ballSpeedRight);
     }
 
     public int getBallSpeedTop() {

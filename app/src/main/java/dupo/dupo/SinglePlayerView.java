@@ -35,6 +35,7 @@ public class SinglePlayerView extends View {
     WindowManager.LayoutParams params;
     int playerScoreOld, playerScoreNew, botScoreOld, botScoreNew = 0;
     TextView scoreTextView;
+    private Sound sound;
 
     public Point size = new Point();
     public SinglePlayerView(Context context) {
@@ -43,6 +44,7 @@ public class SinglePlayerView extends View {
         wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         display.getSize(size);
+        sound = new Sound(context);
 
         scoreTextView = new TextView(context);
         scoreTextView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT));
@@ -108,8 +110,10 @@ public class SinglePlayerView extends View {
         }
         if (this.player.getScore() == 10) {
             score = "Du hast gewonnen!";
+            sound.wonGame();
         } else if(this.bot.getScore() == 10) {
             score = "Du hast verloren!";
+            sound.lostGame();
         } else {
             score = Integer.toString(this.player.getScore()) + " : " + Integer.toString(this.bot.getScore());
         }
