@@ -2,6 +2,7 @@ package dupo.dupo;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.view.View;
 
 /**
  * Created by harald on 08.05.16.
@@ -9,8 +10,8 @@ import android.graphics.Point;
 public class Bot extends Player {
     private int botSpeed = 10;
 
-    public Bot(float left, float top, float right, float bottom, float screenWidth) {
-        super(left, top, right, bottom, screenWidth);
+    public Bot(float left, float top, float right, float bottom, float screenWidth, View v) {
+        super(left, top, right, bottom, screenWidth, v);
     }
 
     public void move(Ball ball, Point screen) {

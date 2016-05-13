@@ -36,6 +36,9 @@ public class GameThread extends TimerTask {
 
     @Override
     public void run() {
+        if(!player.running) {
+            this.cancel();
+        }
         this.ball.move();
         this.bot.move(this.ball, this.size);
         this.bot.checkCollision(this.ball);

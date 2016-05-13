@@ -3,17 +3,21 @@ package dupo.dupo;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.view.View;
 
 /**
  * Created by harald on 08.05.16.
  */
 public class Player extends GameObject {
     protected float left, top, right, bottom;
-    protected int width, score;
+    protected int width;
+    public int score;
     protected float screenWidth;
     protected Rect rect;
+    public static boolean running = true;
+    View v;
 
-    public Player(float left, float top, float right, float bottom, float screenWidth) {
+    public Player(float left, float top, float right, float bottom, float screenWidth, View v) {
         this.left = left;
         this.top = top;
         this.right = right;
@@ -22,6 +26,7 @@ public class Player extends GameObject {
         this.width = (int) (right - left);
         this.paint = new Paint();
         this.screenWidth = screenWidth;
+        this.v = v;
     }
 
     public void move(float x) {
@@ -35,6 +40,13 @@ public class Player extends GameObject {
 
     public void incrementScore() {
         this.score++;
+        if (this.score == 10) {
+            this.running = false;
+        }
+    }
+
+    public int getScore() {
+        return this.score;
     }
 
     public void checkCollision(Ball ball) {

@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.View;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,6 +21,7 @@ public class Ball extends GameObject {
     private int ballSpeedRight = 15;
     private boolean startDown;
     private Vibrator v;
+    private View view;
 
     public Ball(float cx, float cy, float radius, Point displaySize, Context context) {
         this.initCx = this.cx = cx;
@@ -28,6 +30,7 @@ public class Ball extends GameObject {
         this.radius = radius;
         this.paint = new Paint();
         this.v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        this.view = view;
     }
 
     public void setColor(int col) {
@@ -74,7 +77,6 @@ public class Ball extends GameObject {
             p.incrementScore();
             v.vibrate(300);
         }
-        Log.d("Score", Integer.toString(p.score) + " Player - Bot " + Integer.toString(bot.score));
     }
 
     public void bounceOffTop(float left, float center, float right) {
