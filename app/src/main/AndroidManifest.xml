@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -20,14 +22,15 @@
         </activity>
         <activity
             android:name=".Connection"
-            android:label="@string/title_activity_connection"></activity>
+            android:label="@string/title_activity_connection" />
         <activity
             android:name=".Settings"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".Invention"
-            android:label="@string/title_activity_invention"></activity>
-        <activity android:name=".multiplayerMode"></activity>
+            android:label="@string/title_activity_invention" />
+        <activity android:name=".multiplayerMode" />
+        <activity android:name=".bluetoothConnect"></activity>
     </application>
 
 </manifest>
