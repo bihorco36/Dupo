@@ -23,7 +23,7 @@ import org.w3c.dom.Text;
 import java.util.Timer;
 
 
-public class SinglePlayerView extends View {
+public class SinglePlayerView extends GameView {
     Paint paint = new Paint();
     Canvas canvas = new Canvas();
     Ball ball;
