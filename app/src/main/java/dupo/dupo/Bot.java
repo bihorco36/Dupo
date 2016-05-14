@@ -11,8 +11,8 @@ import android.view.View;
 public class Bot extends Player {
     private int botSpeed = 10;
 
-    public Bot(float left, float top, float right, float bottom, float screenWidth, View v) {
-        super(left, top, right, bottom, screenWidth, v);
+    public Bot(float left, float top, float right, float bottom, Point size, View v) {
+        super(left, top, right, bottom, size, v);
     }
 
     public void move(Ball ball, Point screen) {
@@ -26,8 +26,6 @@ public class Bot extends Player {
                 this.right = this.left + this.width;
             }
         }
-        Log.d("Left", Float.toString(this.left));
-        Log.d("Rigth", Float.toString(this.right));
     }
 
     @Override

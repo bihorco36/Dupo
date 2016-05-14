@@ -28,7 +28,9 @@ public class SinglePlayerView extends GameView {
     public Point size = new Point();
     public SinglePlayerView(Context context) {
         super(context);
-        this.bot = new Bot(size.x / 2 - 200, 100, size.x / 2 + 200, 200, this.size.x, this);
+        this.size.set(this.x, this.y);
+        this.MODE = 1;
+        this.bot = new Bot(size.x / 2 - 200, 100, size.x / 2 + 200, 200, this.size, this);
         this.bot.setColor(Color.BLACK);
         this.opponent = this.bot;
         Timer t = new Timer();
@@ -53,7 +55,6 @@ public class SinglePlayerView extends GameView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float y = event.getY();
         this.player.move(event.getX());
         draw(canvas);
         return super.onTouchEvent(event);

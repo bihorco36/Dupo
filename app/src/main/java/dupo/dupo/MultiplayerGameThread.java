@@ -1,16 +1,13 @@
 package dupo.dupo;
 
 import android.graphics.Point;
-import android.util.Log;
 import android.view.View;
-
-import java.util.TimerTask;
 
 /**
  * Created by harald on 14.05.16.
  */
-public class SinglePlayerGameThread extends GameThread {
-    public SinglePlayerGameThread(Player player, Ball ball, View view, Bot opponent, Point size) {
+public class MultiplayerGameThread extends GameThread {
+    public MultiplayerGameThread(Player player, Ball ball, View view, Player opponent, Point size) {
         super(player, ball, view, opponent, size);
     }
 
@@ -18,6 +15,6 @@ public class SinglePlayerGameThread extends GameThread {
     public void run() {
         super.run();
         this.opponent.checkCollision(this.ball);
-        this.opponent.move(this.ball, this.size);
     }
+
 }

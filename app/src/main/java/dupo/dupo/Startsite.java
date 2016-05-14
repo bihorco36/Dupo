@@ -48,7 +48,7 @@ public class Startsite extends ActionBarActivity {
     }
 
     public void goToMultiPlayer(View view) {
-        setContentView(new SinglePlayerView(this));
+        setContentView(new MultiplayerView(this));
     }
 
     public void goToSinglePlayer(View view) {

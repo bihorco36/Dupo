@@ -19,10 +19,6 @@ public class GameThread extends TimerTask {
     public GameThread() {
         super();
     }
-    protected int opponentScore, playerScore= 0;
-
-    int playerPoints;
-    int botPoints;
 
     public GameThread(Player player, Ball ball, View view, Player opponent, Point size) {
         this.player = player;

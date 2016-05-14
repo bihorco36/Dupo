@@ -24,12 +24,6 @@
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name=".MultiPayerGame"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_multi_payer_game"
-            android:theme="@style/FullscreenTheme" >
-        </activity>
-        <activity
             android:name=".Invention"
             android:label="@string/title_activity_invention" >
         </activity>

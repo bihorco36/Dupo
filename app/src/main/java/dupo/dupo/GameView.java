@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -26,14 +27,16 @@ public class GameView extends View {
     Player opponent;
     Ball ball;
     TextView score;
+    protected int MODE;
     Context context;
     WindowManager wm;
     WindowManager.LayoutParams params;
     int playerScoreOld, playerScoreNew, opponentScoreOld, opponentScoreNew = 0;
     TextView scoreTextView;
     protected Sound sound;
+    protected Point size = new Point();
+    protected int x,y;
 
-    public Point size = new Point();
     public GameView(Context context) {
         super(context);
         setClickable(true);
@@ -41,6 +44,9 @@ public class GameView extends View {
         Display display = wm.getDefaultDisplay();
         display.getSize(size);
         sound = new Sound(context);
+        x = size.x;
+        y = size.y;
+
 
         scoreTextView = new TextView(context);
         scoreTextView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT));
@@ -55,7 +61,7 @@ public class GameView extends View {
         this.context = context;
         this.ball = new Ball(size.x / 2 + 25, size.y / 2 + 25, 50, this.size, context);
         this.ball.setColor(Color.RED);
-        this.player = new Player(size.x / 2 - 200, 5* (Math.round((size.y - 200) / 5)), size.x / 2 + 200, size.y - 100, size.x, this);
+        this.player = new Player(size.x / 2 - 200, 5* (Math.round((size.y - 200) / 5)), size.x / 2 + 200, size.y - 100, size, this);
         this.player.setColor(Color.BLACK);
     }
 
@@ -82,8 +88,6 @@ public class GameView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float y = event.getY();
-        this.player.move(event.getX());
         draw(canvas);
         return super.onTouchEvent(event);
     }
@@ -97,11 +101,18 @@ public class GameView extends View {
             e.printStackTrace();
         }
         if (this.player.getScore() == 10) {
-            score = "Du hast gewonnen!";
+            if(this.MODE == 1) {
+                score = "Du hast gewonnen!";
+            } else {
+                score = "Spieler 1 gewinnt!";
+            }
             sound.wonGame();
         } else if(this.opponent.getScore() == 10) {
-            score = "Du hast verloren!";
-            sound.lostGame();
+            if(this.MODE == 1) {
+                score = "Du hast verloren";
+            } else {
+                score = "Spieler 2 gewinnt!";
+            }            sound.lostGame();
         } else {
             score = Integer.toString(this.player.getScore()) + " : " + Integer.toString(this.opponent.getScore());
         }

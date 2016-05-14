@@ -15,10 +15,11 @@ public class Player extends GameObject {
     public int score;
     protected float screenWidth;
     protected Rect rect;
+    protected Point size;
     public static boolean running = true;
     View v;
 
-    public Player(float left, float top, float right, float bottom, float screenWidth, View v) {
+    public Player(float left, float top, float right, float bottom, Point size, View v) {
         this.left = left;
         this.top = top;
         this.right = right;
@@ -26,8 +27,9 @@ public class Player extends GameObject {
         this.rect = new Rect((int) left,(int)  top, (int) right, (int) bottom);
         this.width = (int) (right - left);
         this.paint = new Paint();
-        this.screenWidth = screenWidth;
+        this.screenWidth = size.x;
         this.v = v;
+        this.size = size;
     }
 
     public void move(float x) {
@@ -40,7 +42,6 @@ public class Player extends GameObject {
     }
 
     public void move(Ball ball, Point screen) {
-
     }
 
     public void incrementScore() {
@@ -55,11 +56,20 @@ public class Player extends GameObject {
     }
 
     public void checkCollision(Ball ball) {
-        if (this.top == ball.getY() + ball.getRadius()) {
-            ball.bounceOffTop(this.left, this.left + this.width / 2, this.right);
-        }
-        if(this.top < ball.getY() + ball.getRadius() && this.bottom >= ball.getY() - ball.getRadius()) {
-            ball.bounceOffSide(this.left, this.right);
+        if(this.bottom > this.size.y / 2 ) {
+            if (this.top == ball.getY() + ball.getRadius()) {
+                ball.bounceOffTop(this.left, this.left + this.width / 2, this.right);
+            }
+            if(this.top < ball.getY() + ball.getRadius() && this.bottom >= ball.getY() - ball.getRadius()) {
+                ball.bounceOffSide(this.left, this.right);
+            }
+        } else {
+            if (this.bottom == ball.getY() - ball.getRadius()) {
+                ball.bounceOffTop(this.left, this.left + this.width / 2, this.right);
+            }
+            if(this.top < ball.getY() + ball.getRadius() && this.bottom >= ball.getY() - ball.getRadius()) {
+                ball.bounceOffSide(this.left, this.right);
+            }
         }
     }
 
