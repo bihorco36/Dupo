@@ -2,6 +2,7 @@ package dupo.dupo;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -25,6 +26,8 @@ public class Bot extends Player {
                 this.right = this.left + this.width;
             }
         }
+        Log.d("Left", Float.toString(this.left));
+        Log.d("Rigth", Float.toString(this.right));
     }
 
     @Override

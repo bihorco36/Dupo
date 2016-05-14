@@ -11,7 +11,7 @@ import android.view.View;
 import java.util.TimerTask;
 
 public class GameThread extends TimerTask {
-    Bot bot;
+    Player opponent;
     Player player;
     Ball ball;
     View view;
@@ -19,19 +19,17 @@ public class GameThread extends TimerTask {
     public GameThread() {
         super();
     }
-    public int botScore = 0;
-    public int playerScore= 0;
+    protected int opponentScore, playerScore= 0;
 
     int playerPoints;
     int botPoints;
 
-    public GameThread(Player player, Ball ball, View view, Bot bot, Point size) {
-//        this.bot = bot;
+    public GameThread(Player player, Ball ball, View view, Player opponent, Point size) {
         this.player = player;
         this.ball = ball;
         this.view = view;
         this.size = size;
-        this.bot = bot;
+        this.opponent = opponent;
     }
 
     @Override
@@ -40,9 +38,7 @@ public class GameThread extends TimerTask {
             this.cancel();
         }
         this.ball.move();
-        this.bot.move(this.ball, this.size);
-        this.bot.checkCollision(this.ball);
-        this.ball.checkCollission(this.player, this.bot);
+        this.ball.checkCollission(this.player, this.opponent);
         this.player.checkCollision(this.ball);
         this.view.post(new Runnable() {
             @Override

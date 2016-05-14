@@ -24,49 +24,16 @@ import java.util.Timer;
 
 
 public class SinglePlayerView extends GameView {
-    Paint paint = new Paint();
-    Canvas canvas = new Canvas();
-    Ball ball;
-    Player player;
-    Bot bot;
-    TextView score;
-    Context context;
-    WindowManager wm;
-    WindowManager.LayoutParams params;
-    int playerScoreOld, playerScoreNew, botScoreOld, botScoreNew = 0;
-    TextView scoreTextView;
-    private Sound sound;
-
+    private Bot bot;
     public Point size = new Point();
     public SinglePlayerView(Context context) {
         super(context);
-        setClickable(true);
-        wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        display.getSize(size);
-        sound = new Sound(context);
-
-        scoreTextView = new TextView(context);
-        scoreTextView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT));
-        scoreTextView.setTextSize(50);
-        scoreTextView.setText("0 : 0");
-        scoreTextView.setGravity(Gravity.CENTER);
-        this.params = new WindowManager.LayoutParams (
-                WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
-                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-                PixelFormat.TRANSLUCENT ) ;
-        wm.addView(scoreTextView, params);
-        this.context = context;
-        this.ball = new Ball(size.x / 2 + 25, size.y / 2 + 25, 50, this.size, context);
-        this.ball.setColor(Color.RED);
-        this.player = new Player(size.x / 2 - 200, 5* (Math.round((size.y - 200) / 5)), size.x / 2 + 200, size.y - 100, size.x, this);
-        this.player.setColor(Color.BLACK);
         this.bot = new Bot(size.x / 2 - 200, 100, size.x / 2 + 200, 200, this.size.x, this);
         this.bot.setColor(Color.BLACK);
-        draw(canvas);
-
+        this.opponent = this.bot;
         Timer t = new Timer();
-        t.scheduleAtFixedRate(new GameThread(this.player, this.ball, this, this.bot,size), 0, 10);
+        t.scheduleAtFixedRate(new SinglePlayerGameThread(this.player, this.ball, this, this.bot,size), 0, 10);
+        draw(canvas);
     }
 
     public SinglePlayerView(Context context, AttributeSet attrs) {
@@ -79,17 +46,9 @@ public class SinglePlayerView extends GameView {
 
     @Override
     public void onDraw(Canvas canvas) {
+        this.opponentScoreNew = bot.getScore();
         super.onDraw(canvas);
-        this.ball.draw(canvas);
-        this.player.draw(canvas);
         this.bot.draw(canvas);
-        this.playerScoreNew = this.player.getScore();
-        this.botScoreNew = this.bot.getScore();
-        if(playerScoreNew != playerScoreOld || botScoreNew != botScoreOld) {
-            playerScoreOld = playerScoreNew;
-            botScoreOld = botScoreNew;
-            showScore();
-        }
     }
 
     @Override
@@ -101,25 +60,7 @@ public class SinglePlayerView extends GameView {
     }
 
     public void showScore() {
-        String score;
-        try {
-            wm.removeView(this.scoreTextView);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (this.player.getScore() == 10) {
-            score = "Du hast gewonnen!";
-            sound.wonGame();
-        } else if(this.bot.getScore() == 10) {
-            score = "Du hast verloren!";
-            sound.lostGame();
-        } else {
-            score = Integer.toString(this.player.getScore()) + " : " + Integer.toString(this.bot.getScore());
-        }
-        scoreTextView.setText(score);
-        wm.addView((View) scoreTextView, params);
+        super.showScore();
 
     }
-
 }

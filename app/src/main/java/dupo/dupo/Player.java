@@ -2,6 +2,7 @@ package dupo.dupo;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.View;
 
@@ -36,6 +37,10 @@ public class Player extends GameObject {
         }
         this.rect.left = (int) this.left;
         this.rect.right = (int) this.right;
+    }
+
+    public void move(Ball ball, Point screen) {
+
     }
 
     public void incrementScore() {
