@@ -48,7 +48,10 @@ public class Startsite extends ActionBarActivity {
     }
 
     public void goToMultiPlayer(View view) {
-        setContentView(new MultiplayerView(this));
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //setContentView(new MultiplayerView(this));
+        Intent intent = new Intent(this, multiplayerMode.class);
+        startActivity(intent);
     }
 
     public void goToSinglePlayer(View view) {

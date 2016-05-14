@@ -6,8 +6,8 @@ import android.view.View;
 /**
  * Created by harald on 14.05.16.
  */
-public class MultiplayerGameThread extends GameThread {
-    public MultiplayerGameThread(Player player, Ball ball, View view, Player opponent, Point size) {
+public class LocalMultiplayerGameThread extends GameThread {
+    public LocalMultiplayerGameThread(Player player, Ball ball, View view, Player opponent, Point size) {
         super(player, ball, view, opponent, size);
     }
 

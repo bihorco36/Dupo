@@ -12,24 +12,24 @@ import java.util.Timer;
 /**
  * Created by harald on 14.05.16.
  */
-public class MultiplayerView extends GameView {
+public class LocalMultiplayerView extends GameView {
         public Point size = new Point();
-        public MultiplayerView(Context context) {
+        public LocalMultiplayerView(Context context) {
             super(context);
             this.size.set(this.x, this.y);;
             this.opponent = new Player(size.x / 2 - 200, 100, size.x / 2 + 200, 200, this.size, this);
             this.opponent.setColor(Color.BLACK);
             this.MODE = 2;
             Timer t = new Timer();
-            t.scheduleAtFixedRate(new MultiplayerGameThread(this.player, this.ball, this, this.opponent,size), 0, 10);
+            t.scheduleAtFixedRate(new LocalMultiplayerGameThread(this.player, this.ball, this, this.opponent,size), 0, 10);
             draw(canvas);
         }
 
-        public MultiplayerView(Context context, AttributeSet attrs) {
+        public LocalMultiplayerView(Context context, AttributeSet attrs) {
             super(context, attrs);
         }
 
-        public MultiplayerView(Context context, AttributeSet attrs, int defStyle) {
+        public LocalMultiplayerView(Context context, AttributeSet attrs, int defStyle) {
             super(context, attrs, defStyle);
         }
 
@@ -40,6 +40,7 @@ public class MultiplayerView extends GameView {
             this.opponent.draw(canvas);
         }
 
+        // TODO: Implement multitouch
         @Override
         public boolean onTouchEvent(MotionEvent event) {
             float y = event.getY();
