@@ -1,12 +1,17 @@
 package dupo.dupo;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 public class Startsite extends ActionBarActivity {
@@ -41,8 +46,8 @@ public class Startsite extends ActionBarActivity {
     }
 
     public void goToSettings(View view) {
-        Intent intent = new Intent(this, Settings.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, Settings.class);
+//        startActivity(intent);
     }
 
     public void goToMultiPlayer(View view) {

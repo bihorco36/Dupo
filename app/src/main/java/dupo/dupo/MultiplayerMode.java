@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import dupo.dupo.bluetooth.MainActivity;
 
 public class MultiplayerMode extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class MultiplayerMode extends AppCompatActivity {
     }
 
     public void goToNetworkMultiplayer(View view) {
-        //Intent intent = new Intent(this, BluetoothConnect.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, dupo.dupo.bluetooth.MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vibration"
+            android:id="@+id/vibration"
+            android:enabled="true"
+            android:layout_marginTop="30dp"
+            android:width="300dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sound"
+            android:id="@+id/sound"
+            android:enabled="true"
+            android:layout_marginTop="25dp"
+            android:width="300dp"
+            android:layout_below="@+id/vibration"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+</LinearLayout>

@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -25,6 +26,7 @@ public class Ball extends GameObject {
     private Vibrator v;
     private View view;
     private Sound sound;
+    private Settings settings;
 
 
     public Ball(float cx, float cy, float radius, Point displaySize, Context context) {
@@ -36,6 +38,8 @@ public class Ball extends GameObject {
         this.v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         this.sound = new Sound(context);
         this.sound.startGame();
+//        this.settings = PreferenceManager.getDefaultSharedPreferences(context);
+//        String syncConnPref = this.settings.getString(SettingsActivity.KEY_PREF_SYNC_CONN, ""
     }
 
     public void setColor(int col) {

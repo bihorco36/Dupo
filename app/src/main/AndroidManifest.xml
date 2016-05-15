@@ -27,7 +27,7 @@
             android:name=".Invention"
             android:label="@string/title_activity_invention" />
         <activity android:name=".MultiplayerMode" />
-        <activity android:name=".BluetoothConnect"></activity>
+        <activity android:name=".bluetooth.MainActivity"></activity>
     </application>
 
 </manifest>
