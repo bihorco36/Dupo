@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.bluetoothchat;
+package dupo.dupo.bluetooth;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -41,8 +41,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.android.common.logger.Log;
+import android.util.Log;
 
 import dupo.dupo.R;
 
@@ -86,6 +85,7 @@ public class BluetoothChatFragment extends Fragment {
     /**
      * Member object for the chat services
      */
+    private BluetoothChatService mChatService = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -160,7 +160,8 @@ public class BluetoothChatFragment extends Fragment {
     private void setupChat() {
         Log.d(TAG, "setupChat()");
 
-        // Initialize the array adapter for the conversation thread
+        // Initiali
+        // ze the array adapter for the conversation thread
         mConversationArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.message);
 
         mConversationView.setAdapter(mConversationArrayAdapter);

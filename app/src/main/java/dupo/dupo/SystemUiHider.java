@@ -9,11 +9,11 @@ import android.view.View;
  * status bar and navigation/system bar. This class uses backward-compatibility
  * techniques described in <a href=
  * "http://developer.android.com/training/backward-compatible-ui/index.html">
- * Creating Backward-Compatible UIs</a> to ensure that devices running any
+ * Creating Backward-Compatible UIs</a> to ensure that devicesArray running any
  * version of ndroid OS are supported. More specifically, there are separate
- * implementations of this abstract class: for newer devices,
+ * implementations of this abstract class: for newer devicesArray,
  * {@link #getInstance} will return a {@link SystemUiHiderHoneycomb} instance,
- * while on older devices {@link #getInstance} will return a
+ * while on older devicesArray {@link #getInstance} will return a
  * {@link SystemUiHiderBase} instance.
  * <p/>
  * For more on system bars, see <a href=
@@ -27,11 +27,11 @@ public abstract class SystemUiHider {
     /**
      * When this flag is set, the
      * {@link android.view.WindowManager.LayoutParams#FLAG_LAYOUT_IN_SCREEN}
-     * flag will be set on older devices, making the status bar "float" on top
+     * flag will be set on older devicesArray, making the status bar "float" on top
      * of the activity layout. This is most useful when there are no controls at
      * the top of the activity layout.
      * <p/>
-     * This flag isn't used on newer devices because the <a
+     * This flag isn't used on newer devicesArray because the <a
      * href="http://developer.android.com/design/patterns/actionbar.html">action
      * bar</a>, the most important structural element of an Android app, should
      * be visible and not obscured by the system UI.

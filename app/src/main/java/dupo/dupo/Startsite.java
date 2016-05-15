@@ -2,12 +2,10 @@ package dupo.dupo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
 
@@ -50,7 +48,7 @@ public class Startsite extends ActionBarActivity {
     public void goToMultiPlayer(View view) {
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //setContentView(new MultiplayerView(this));
-        Intent intent = new Intent(this, multiplayerMode.class);
+        Intent intent = new Intent(this, MultiplayerMode.class);
         startActivity(intent);
     }
 
