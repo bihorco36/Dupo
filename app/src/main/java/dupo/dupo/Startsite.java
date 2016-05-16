@@ -46,8 +46,8 @@ public class Startsite extends ActionBarActivity {
     }
 
     public void goToSettings(View view) {
-//        Intent intent = new Intent(this, Settings.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
     }
 
     public void goToMultiPlayer(View view) {

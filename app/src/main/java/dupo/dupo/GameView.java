@@ -1,6 +1,7 @@
 package dupo.dupo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -36,6 +37,7 @@ public class GameView extends View {
     protected Sound sound;
     protected Point size = new Point();
     protected int x,y;
+    SharedPreferences sharedPreferences;
 
     public GameView(Context context) {
         super(context);
@@ -63,6 +65,7 @@ public class GameView extends View {
         this.ball.setColor(Color.RED);
         this.player = new Player(size.x / 2 - 200, 5* (Math.round((size.y - 200) / 5)), size.x / 2 + 200, size.y - 100, size, this);
         this.player.setColor(Color.BLACK);
+        this.sharedPreferences = context.getSharedPreferences("settings", 0);
     }
 
     public GameView(Context context, AttributeSet attrs) {
@@ -106,13 +109,18 @@ public class GameView extends View {
             } else {
                 score = "Spieler 1 gewinnt!";
             }
-            sound.wonGame();
+            if(this.sharedPreferences.getBoolean("sound", true)) {
+                sound.wonGame();
+            }
         } else if(this.opponent.getScore() == 10) {
             if(this.MODE == 1) {
                 score = "Du hast verloren";
             } else {
                 score = "Spieler 2 gewinnt!";
-            }            sound.lostGame();
+            }
+            if(this.sharedPreferences.getBoolean("sound", true)) {
+                sound.lostGame();
+            }
         } else {
             score = Integer.toString(this.player.getScore()) + " : " + Integer.toString(this.opponent.getScore());
         }

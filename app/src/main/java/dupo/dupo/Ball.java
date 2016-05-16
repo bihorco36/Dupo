@@ -1,6 +1,7 @@
 package dupo.dupo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -20,13 +21,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Ball extends GameObject {
     private float cx, cy, radius, initCx, initCy;
     private Point displaySize;
+    private SharedPreferences sharedPreferences;
     private int ballSpeedTop = 5;
     private int ballSpeedRight = 15;
     private boolean startDown;
     private Vibrator v;
     private View view;
     private Sound sound;
-    private Settings settings;
 
 
     public Ball(float cx, float cy, float radius, Point displaySize, Context context) {
@@ -37,9 +38,10 @@ public class Ball extends GameObject {
         this.paint = new Paint();
         this.v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         this.sound = new Sound(context);
-        this.sound.startGame();
-//        this.settings = PreferenceManager.getDefaultSharedPreferences(context);
-//        String syncConnPref = this.settings.getString(SettingsActivity.KEY_PREF_SYNC_CONN, ""
+        this.sharedPreferences = context.getSharedPreferences("settings", 0);
+        if(sharedPreferences.getBoolean("sound", true)) {
+            this.sound.startGame();
+        }
     }
 
     public void setColor(int col) {
@@ -70,23 +72,25 @@ public class Ball extends GameObject {
     public void checkCollission(Player p, Player bot) {
         if (this.cx >= this.displaySize.x - 1.5*radius) {
             this.ballSpeedRight = invert(this.ballSpeedRight);
-            this.sound.bounce();
         }
         if (this.cx <= 1.5*radius) {
             this.ballSpeedRight = invert(this.ballSpeedRight);
-            this.sound.bounce();
         }
         if (this.cy >= this.displaySize.y - radius) {
             this.toInitialPos();
             this.startDown = false;
             bot.incrementScore();
-            v.vibrate(300);
+            if(sharedPreferences.getBoolean("vibration", true)) {
+                v.vibrate(300);
+            }
         }
         if (this.cy - this.radius <= 0) {
             this.startDown = true;
             toInitialPos();
             p.incrementScore();
-            v.vibrate(300);
+            if(sharedPreferences.getBoolean("vibration", true)) {
+                v.vibrate(300);
+            }
         }
     }
 
@@ -94,12 +98,16 @@ public class Ball extends GameObject {
         if(left <= this.cx && center >= this.cx) {
             this.ballSpeedRight = invert(Math.abs(randomAngle()));
             this.ballSpeedTop = invert(this.ballSpeedTop);
-            this.sound.bounce();
+            if(sharedPreferences.getBoolean("sound", true)) {
+                this.sound.bounce();
+            }
         }
         if(right >= this.cx && center <= this.cx) {
             this.ballSpeedRight = Math.abs(randomAngle());
             this.ballSpeedTop = invert(this.ballSpeedTop);
-            this.sound.bounce();
+            if(sharedPreferences.getBoolean("sound", true)) {
+                this.sound.bounce();
+            }
         }
     }
 
