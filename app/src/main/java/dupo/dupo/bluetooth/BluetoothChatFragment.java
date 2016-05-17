@@ -44,6 +44,7 @@ import android.widget.Toast;
 import android.util.Log;
 
 import dupo.dupo.R;
+import dupo.dupo.SinglePlayerView;
 
 /**
  * This fragment controls Bluetooth to communicate with other devices.
@@ -61,6 +62,7 @@ public class BluetoothChatFragment extends Fragment {
     private ListView mConversationView;
     private EditText mOutEditText;
     private Button mSendButton;
+    private boolean isPaired, isConnected = false;
 
     /**
      * Name of the connected device
@@ -112,8 +114,8 @@ public class BluetoothChatFragment extends Fragment {
             Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
             // Otherwise, setup the chat session
-        } else if (mChatService == null) {
-            setupChat();
+        } else if (!isPaired) {
+            showAvailableDevices();
         }
     }
 
@@ -152,6 +154,14 @@ public class BluetoothChatFragment extends Fragment {
         mConversationView = (ListView) view.findViewById(R.id.in);
         mOutEditText = (EditText) view.findViewById(R.id.edit_text_out);
         mSendButton = (Button) view.findViewById(R.id.button_send);
+    }
+
+    private void showAvailableDevices() {
+        setupChat();
+        this.isPaired = true;
+        ensureDiscoverable();
+        Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
+        startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
     }
 
     /**
@@ -198,6 +208,7 @@ public class BluetoothChatFragment extends Fragment {
             Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
             discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
             startActivity(discoverableIntent);
+            Log.d("ensured", "discoverable");
         }
     }
 
@@ -257,6 +268,7 @@ public class BluetoothChatFragment extends Fragment {
         actionBar.setSubtitle(resId);
     }
 
+
     /**
      * Updates the status on the action bar.
      *
@@ -285,7 +297,8 @@ public class BluetoothChatFragment extends Fragment {
                 case Constants.MESSAGE_STATE_CHANGE:
                     switch (msg.arg1) {
                         case BluetoothChatService.STATE_CONNECTED:
-                            setStatus(getString(R.string.title_connected_to, mConnectedDeviceName));
+                            isConnected = true;
+                            startGame();
                             mConversationArrayAdapter.clear();
                             break;
                         case BluetoothChatService.STATE_CONNECTING:
@@ -293,7 +306,7 @@ public class BluetoothChatFragment extends Fragment {
                             break;
                         case BluetoothChatService.STATE_LISTEN:
                         case BluetoothChatService.STATE_NONE:
-                            setStatus(R.string.title_not_connected);
+                            isConnected = false;
                             break;
                     }
                     break;
@@ -328,6 +341,7 @@ public class BluetoothChatFragment extends Fragment {
     };
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("onActivityResult", "called");
         switch (requestCode) {
             case REQUEST_CONNECT_DEVICE_SECURE:
                 // When DeviceListActivity returns with a device to connect
@@ -345,7 +359,8 @@ public class BluetoothChatFragment extends Fragment {
                 // When the request to enable Bluetooth returns
                 if (resultCode == Activity.RESULT_OK) {
                     // Bluetooth is now enabled, so set up a chat session
-                    setupChat();
+                    Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
+                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
                 } else {
                     // User did not enable Bluetooth or an error occurred
                     Log.d(TAG, "BT not enabled");
@@ -355,6 +370,11 @@ public class BluetoothChatFragment extends Fragment {
                 }
         }
     }
+
+    public SinglePlayerView startGame() {
+        return new SinglePlayerView(getContext());
+    }
+
 
     /**
      * Establish connection with other divice

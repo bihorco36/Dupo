@@ -16,11 +16,14 @@ public class MultiplayerMode extends AppCompatActivity {
     }
 
     public void goToLocalMultiplayer(View view) {
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(new LocalMultiplayerView(this));
     }
 
     public void goToNetworkMultiplayer(View view) {
+        this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         Intent intent = new Intent(this, dupo.dupo.bluetooth.MainActivity.class);
         startActivity(intent);
     }

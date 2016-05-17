@@ -26,6 +26,7 @@
         <activity android:name=".MultiplayerMode" />
         <activity android:name=".bluetooth.MainActivity" />
         <activity android:name=".Settings"></activity>
+        <activity android:name=".bluetooth.DeviceListActivity"></activity>
     </application>
 
 </manifest>

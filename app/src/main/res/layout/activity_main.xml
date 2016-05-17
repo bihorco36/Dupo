@@ -31,15 +31,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-            <TextView
-                  style="@style/Widget.SampleMessage"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:paddingLeft="@dimen/horizontal_page_margin"
-                  android:paddingRight="@dimen/horizontal_page_margin"
-                  android:paddingTop="@dimen/vertical_page_margin"
-                  android:paddingBottom="@dimen/vertical_page_margin"
-                  android:text="Text" />
         </ScrollView>
 
         <fragment
@@ -52,12 +43,13 @@
 
     <View
           android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@android:color/darker_gray" />
+          android:layout_height="wrap_content"
+          android:background="@android:color/darker_gray"
+        android:visibility="invisible" />
 
     <FrameLayout
           android:id="@+id/sample_content_fragment"
-          android:layout_weight="2"
+          android:layout_weight="3.01"
           android:layout_width="match_parent"
           android:layout_height="0px" />
 
